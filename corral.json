@@ -1,0 +1,14 @@
+{
+  "packages": [
+    "Config"
+  ],
+  "info": {
+    "description": "Library for sharing configuration data accross actors",
+    "homepage": "https://github.com/vijayee/Config",
+    "license": "GPLv3",
+    "version": "0.0.1",
+    "name": "Config"
+  },
+  "deps": [
+  ]
+}
