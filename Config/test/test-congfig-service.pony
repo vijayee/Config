@@ -1,5 +1,5 @@
 use ".."
-use "ponytest"
+use "pony_test"
 use  "random"
 
 class TestNotify is ConfigNotify
@@ -52,7 +52,7 @@ class iso _TestConfigService is UnitTest
       config'("age") = I64(22)
       config'
     end
-    let configService: ConfigService = ConfigService.fromConfig(config, t)
+    let configService: ConfigService = ConfigService.fromConfig(config)
     let testRecevier1: TestReceiver = TestReceiver(t, config, configService, "Test Receiver 1")
     let testRecevier2: TestReceiver = TestReceiver(t, config, configService, "Test Receiver 2")
     let testRecevier3: TestReceiver = TestReceiver(t, config, configService, "Test Receiver 3")

@@ -1,6 +1,5 @@
 use "collections"
 use "files"
-use "ponytest"
 
 interface ConfigNotify
   fun ref apply(config: Config val)
@@ -11,10 +10,8 @@ type Config is Map[String, (ConfigVal | Array[ConfigVal] val| Map[String, Config
 actor ConfigService
   let subscribers: MapIs[ConfigNotify tag, ConfigNotify]
   var config: Config val
-  let t: TestHelper
 
-  new create(size: USize = 0, t': TestHelper) =>
-    t = t'
+  new create(size: USize = 0) =>
     config = recover val Config(size) end
     subscribers = MapIs[ConfigNotify tag, ConfigNotify]
 
@@ -22,8 +19,7 @@ actor ConfigService
     let notify': ConfigNotify ref = consume notify
     notify'(config)
 
-  new fromConfig(config': Config val, t': TestHelper) =>
-    t = t'
+  new fromConfig(config': Config val) =>
     config = config'
     subscribers = MapIs[ConfigNotify tag, ConfigNotify]
     emit()
@@ -36,9 +32,7 @@ actor ConfigService
     try subscribers.remove(notify)? end
 
   fun ref emit () =>
-    t.log(subscribers.size().string())
     for notify in subscribers.values() do
-      t.log("emitted")
       notify(config)
     end
 
@@ -59,7 +53,6 @@ actor ConfigService
       for pair in config.pairs() do
         config'(pair._1) = pair._2
       end
-      t.log("happened")
       for pair in pairs.values() do
         config'(pair._1) = pair._2
       end

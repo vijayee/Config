@@ -1,5 +1,5 @@
 use ".."
-use "ponytest"
+use "pony_test"
 class iso _TestConfig is UnitTest
   fun name(): String => "Testing Config"
   fun apply(t: TestHelper) =>
